@@ -1,6 +1,6 @@
+mark=5 # number of asterisks
 sym="ó"
 edSym="*"
-mark=5
 
 main()
 {
@@ -18,8 +18,8 @@ main()
 
 	for arg in "$@"; do
 		case $arg in
-			--help|-h) msg 4 ;;
-			--about|-a) msg 3 ;;
+			--help|-h) msg 3 ;;
+			--about|-a) msg 2 ;;
 		esac
 	done
 
@@ -83,7 +83,7 @@ wInit() { stty -icanon -echo && printf "\e[33m\e[2J\e[?25l"; }
 
 restoreTerm() { stty icanon echo && clear && printf "\e[?25h\e[0m" && exit; }
 
-quitHandler() { trap 'restoreTerm' EXIT && trap 'msg 2 && restoreTerm' SIGWINCH; }
+quitHandler() { trap 'restoreTerm' EXIT && trap 'restoreTerm' SIGWINCH; }
 
 inputHandler()
 {
@@ -107,11 +107,17 @@ genRandom()
 	echo $(( min + RANDOM % (max - min + 1) ))
 }
 
-message="Usage: orange.sh [options]
+help="Usage: orange.sh [options]
+
+A trivial asterisk eating game where you are an orange.
 
 Options:
   --help    display this message and exit
   --about   little story about this game
+
+Notice:
+  If you want to change the size of the terminal during the game, the game will close
+  Pay attention to the settings at the beginning of the sh file. You can eat more asterisks if you wish!
 
 Author: Arseniy \"everydayikillmylinux\" Kudashkin
 "
@@ -128,10 +134,8 @@ msg()
 		done
 		exit
 	}
-	(( $1 == 2 )) && printf "\e[2J\e[0H\e[31m%s" \
-		"The window size has changed. Exit!" && sleep 2
-	(( $1 == 3 )) && drawAsciiArt && exit
-	(( $1 == 4 )) && printf "$message" && exit
+	(( $1 == 2 )) && drawAsciiArt && exit
+	(( $1 == 3 )) && printf "$help" && exit
 }
 
 drawAsciiArt()
