@@ -154,12 +154,12 @@ drawAsciiArt()
    /               `.
   /                  \
  |                    |
- |                    | TEXT HERE
- |                    | TEXT HERE
- |                    |
-  \                  /
-  '.                /
-    `.            ,'
+ |                    | Hello, my dear fruit!
+ |                    | Today's the harvest and all oranges are getting ready
+ |                    | for being plucked from the branch and placed in a basket.
+  \                  /  Collect special dust to grow. The more pieces of dust you could receive,
+  '.                /   the more tasty and big fruit you will become! 
+    `.            ,'    Good luck!!!
       `.._ __ _,-'
 
 EOF
